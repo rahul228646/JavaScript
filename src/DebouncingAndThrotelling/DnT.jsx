@@ -54,6 +54,8 @@ const DnT = () => {
     };
   }
 
+
+
   const handleSearchThrottle = throttle2((text) => {
     console.log(text);
   });

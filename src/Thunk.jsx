@@ -21,7 +21,7 @@ function asyncFoo(x, y, cb) {
 }
 
 function asyncFooThunk(cb) {
-  foo(3, 4, cb);
+  asyncFoo(3, 4, cb);
 }
 
 // later

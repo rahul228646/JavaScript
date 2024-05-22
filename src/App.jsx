@@ -4,6 +4,9 @@ import Generators from "./Generators";
 import Thunk from "./Thunk";
 import Curry from "./Curry";
 import Context from "./Context";
+import Loader from "./loader/Loader";
+import LoadashFunctions from "./LoadashFunctions";
+import DnT from "./DebouncingAndThrotelling/DnT";
 
 // let printName = function(args, args2) {
 
@@ -23,24 +26,7 @@ import Context from "./Context";
 // console.log(curriedArea(2)(3), curriedVol(2)(3)(4));
 
 function App() {
-  let name = {
-    first: "Rahul",
-    last: "Kaushik",
-  };
-
-  Object.setPrototypeOf(name, { b: "hi" });
-
-  for (let key of Object.values(name)) {
-    console.log(key);
-  }
-  var a = 40;
-  {
-    var a = 10;
-  }
-
-  console.log(typeof Object );
-
-  return <Context />;
+  return <DnT />;
 }
 
 export default App;
