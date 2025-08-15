@@ -17,6 +17,9 @@ const volume = (x, y, z) => x * y * z;
 const curriedArea = curry(area);
 const curriedVol = curry(volume);
 
+// console.log(curriedArea(3)(4));
+
+
 // another currying ex with recursion
 
 const sum = (a) => {

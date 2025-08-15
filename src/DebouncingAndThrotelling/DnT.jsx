@@ -65,7 +65,7 @@ const DnT = () => {
   });
   return (
     <div>
-      <input onChange={(e) => handleSearch(e.target.value)} />
+      <input onChange={(e) => handleSearchThrottle(e.target.value)} />
       <p>{text}</p>
     </div>
   );

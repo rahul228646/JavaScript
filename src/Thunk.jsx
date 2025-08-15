@@ -33,8 +33,7 @@ asyncFooThunk(function (sum) {
 // thunkify utility
 
 function thunkify(fn) {
-  var args = [].slice.call(arguments, 1); // converts agrumens array to a normal array except the first function
-//   console.log(args, arguments);
+  var args = [...arguments].slice(1); // converts agrumens array to a normal array except the first function
   return function (cb) {
     args.push(cb);
     return fn.apply(null, args);
