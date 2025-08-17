@@ -8,14 +8,16 @@ import Loader from "./loader/Loader";
 import LoadashFunctions from "./LoadashFunctions";
 import DnT from "./DebouncingAndThrotelling/DnT";
 import "./Polyfills";
+import Wrapper from "./wrapp";
 
 function App() {
   return (
     <>
       {/* <Context /> */}
-      <DnT />
+      {/* <DnT /> */}
       {/* <Curry/> */}
-      <Thunk />
+      {/* <Thunk /> */}
+      <Wrapper />
     </>
   );
 }

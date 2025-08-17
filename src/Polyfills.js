@@ -1,3 +1,22 @@
+// Array Flatten ---------------------------------------------------------------------->
+
+Array.prototype.customFlat = function flat(depth = 1) {
+  const res = [];
+  const array = this;
+  array.forEach(function (element) {
+    if (Array.isArray(element) && depth > 0) {
+      res.push(...flat.call(element, depth - 1));
+    } else {
+      res.push(element);
+    }
+  });
+  return res;
+};
+
+const sampleData = [1, 2, 3, 4, [5, [6, 7], 12]];
+
+console.log(sampleData.customFlat(1));
+
 // call ---------------------------------------------------------------------->
 
 Function.prototype.customCall = function (context, ...args) {
@@ -91,7 +110,6 @@ const memoizedFunction = (fn, context) => {
     return res[cachedArgs];
   };
 };
-
 
 // Promise ---------------------------------------------------------------------->
 
