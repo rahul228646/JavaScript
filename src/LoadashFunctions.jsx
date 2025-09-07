@@ -82,47 +82,25 @@ function groupBy(collection, property) {
   return ans;
 }
 
-console.log(
-  groupBy([{ a: { b: { c: 1 } } }, { a: { b: { c: 2 } } }], "a.b.f.c")
-);
-
-// promises
-
-function task(time) {
-  return new Promise(function (resolve, reject) {
-    setTimeout(function () {
-      resolve(time);
-    }, time);
+const exec = async () => {
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("hi");
+      resolve();
+    }, 5000);
   });
-}
 
-function myPromiseAll(taskList) {
-  const results = [];
-  let promisesCompleted = 0;
-  return new Promise((resolve, reject) => {
-    taskList.forEach((promise, index) => {
-      promise
-        .then((val) => {
-          results[index] = val;
-          promisesCompleted += 1;
-          if (promisesCompleted === taskList.length) {
-            resolve(results);
-          }
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("helllo");
+      resolve();
+    }, 3000);
   });
-}
+};
 
-const taskList = [task(1000), task(5000), task(3000)];
+exec();
 
-myPromiseAll(taskList)
-  .then((results) => {
-    console.log("got results", results);
-  })
-  .catch(console.error);
+console.log(groupBy([{ a: { b: { c: 1 } } }, { a: { b: { c: 2 } } }], "a.b.c"));
 
 const LoadashFunctions = () => {
   return <div>LoadashFunctions</div>;

@@ -1,3 +1,6 @@
+// TODO : Object Flat
+
+
 // Array Flatten ---------------------------------------------------------------------->
 
 Array.prototype.customFlat = function flat(depth = 1) {
@@ -29,7 +32,7 @@ Function.prototype.customCall = function (context, ...args) {
 
 // apply ---------------------------------------------------------------------->
 
-Function.prototype.customCall = function (context, args = []) {
+Function.prototype.customApply = function (context, args = []) {
   if (typeof this !== "function") {
     throw new Error("Not a function");
   }
@@ -173,3 +176,43 @@ promiseTest
   .catch((err) => {
     console.log(err);
   });
+
+
+
+// promises ------------------------------------------------------>
+
+function task(time) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      resolve(time);
+    }, time);
+  });
+}
+
+function myPromiseAll(taskList) {
+  const results = [];
+  let promisesCompleted = 0;
+  return new Promise((resolve, reject) => {
+    taskList.forEach((promise, index) => {
+      promise
+        .then((val) => {
+          results[index] = val;
+          promisesCompleted += 1;
+          if (promisesCompleted === taskList.length) {
+            resolve(results);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  });
+}
+
+const taskList = [task(1000), task(5000), task(3000)];
+
+myPromiseAll(taskList)
+  .then((results) => {
+    console.log("got results", results);
+  })
+  .catch(console.error);

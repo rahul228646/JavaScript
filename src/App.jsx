@@ -18,6 +18,7 @@ function App() {
       {/* <Curry/> */}
       {/* <Thunk /> */}
       <Wrapper />
+      <LoadashFunctions />
     </>
   );
 }

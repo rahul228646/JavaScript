@@ -54,8 +54,6 @@ const DnT = () => {
     };
   }
 
-
-
   const handleSearchThrottle = throttle2((text) => {
     console.log(text);
   });
@@ -72,3 +70,4 @@ const DnT = () => {
 };
 
 export default DnT;
+
