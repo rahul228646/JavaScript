@@ -9,6 +9,7 @@ import LoadashFunctions from "./LoadashFunctions";
 import DnT from "./DebouncingAndThrotelling/DnT";
 import "./Polyfills";
 import Wrapper from "./wrapp";
+import "./Polyfills";
 
 function App() {
   return (

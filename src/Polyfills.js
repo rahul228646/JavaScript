@@ -1,88 +1,38 @@
 // TODO : Object Flat
-
-function flattenObject(obj, prefix = '', result = {}) {
-  for (const [key, value] of Object.entries(obj)) {
-    const newKey = prefix ? `${prefix}.${key}` : key;
-
-    if (
-      value &&
-      typeof value === 'object' &&
-      !Array.isArray(value) &&
-      !(value instanceof Date)
-    ) {
-      // Recurse into nested plain objects
+function flattenObject(obj, prefix = "", result = {}) {
+  if (!prefix && obj == null) return null;
+  if (obj == null) {
+    result[prefix] = null;
+    return result;
+  }
+  if (Array.isArray(obj)) {
+    obj.forEach((value, index) => {
+      const newKey = prefix ? `${prefix}.${index}` : index;
       flattenObject(value, newKey, result);
-    } else {
-      result[newKey] = value;
-    }
+    });
+  } else if (typeof obj === "object" && !(obj instanceof Date)) {
+    Object.entries(obj).forEach(([key, value]) => {
+      const newKey = prefix ? `${prefix}.${key}` : key;
+      flattenObject(value, newKey, result);
+    });
+  } else {
+    result[prefix] = obj;
   }
   return result;
 }
 
 const nested = {
   user: {
-    name: 'Alice',
-    address: { city: 'Paris', zip: 75000 },
+    name: "Alice",
+    address: { city: "Paris", zip: 75000 },
   },
   active: true,
+  tags: ["a", "b"],
+  name: new Date(),
 };
 
 const flat = flattenObject(nested);
 console.log(flat);
-/*
-{
-  'user.name': 'Alice',
-  'user.address.city': 'Paris',
-  'user.address.zip': 75000,
-  'active': true
-}
-*/
-
-function flattenObjectWithArray(obj, prefix = '', result = {}) {
-  if (obj === null || typeof obj !== 'object') {
-    // primitive or null
-    result[prefix] = obj;
-    return result;
-  }
-
-  const isArray = Array.isArray(obj);
-  const entries = isArray ? obj.entries() : Object.entries(obj);
-
-  for (const [key, value] of entries) {
-    // For arrays, key is the index (a number); for objects, it's a string
-    const newKey = prefix
-      ? `${prefix}.${isArray ? key : key}`
-      : String(key);
-
-    if (value !== null && typeof value === 'object') {
-      flattenObjectWithArray(value, newKey, result);
-    } else {
-      result[newKey] = value;
-    }
-  }
-
-  return result;
-}
-
-const nested2 = {
-  user: {
-    name: 'Alice',
-    hobbies: ['chess', { sport: 'tennis' }]
-  },
-  tags: ['a', 'b'],
-};
-
-console.log(flattenObject(nested2));
-/*
-{
-  'user.name': 'Alice',
-  'user.hobbies.0': 'chess',
-  'user.hobbies.1.sport': 'tennis',
-  'tags.0': 'a',
-  'tags.1': 'b'
-}
-*/
-
 
 // Array Flatten ---------------------------------------------------------------------->
 
@@ -196,4 +146,3 @@ const memoizedFunction = (fn, context) => {
     return res[cachedArgs];
   };
 };
-
